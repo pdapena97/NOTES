@@ -1,0 +1,17 @@
+
+
+
+
+
+Este .txt deberia llegar instrucciones? o Sea README
+node run dev... explicar como funciona .env .... ? lo de initDB.js para hacer crear tablas...
+
+
+
+Tener el postman bien preparado.
+Subir a GitHub, error al subir demasiados?
+borrar antes uploads?,
+y el tema del .env : reguntar a Stefano si tal, si el .env tiene que ir vacio.
+
+en getUser falta autorizar? realmente no me lo piden, mandarlo a tomar por culo?
+Vaciar Uploads?
