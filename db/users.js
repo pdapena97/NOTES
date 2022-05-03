@@ -18,7 +18,7 @@ const getUserByEmail = async (email) => {
         );
 
         if (result.length === 0) {
-            throw generateError('No hay ningún usuario con ese email', 404);
+            throw generateError('No hay ningún usuario con ese email, regístrate, por favor', 404);
         }
 
         return result[0];

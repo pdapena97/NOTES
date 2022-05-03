@@ -8,7 +8,8 @@ const jwt = require('jsonwebtoken');
 
 
 
-
+// Controlador para ver todas las notas creadas por un usuario en concreto, a través de su id.
+// Necesita identificarse como su creador.
 const getNotesController = async (req, res, next) => {
     try {
         const { id } = req.params;
@@ -36,7 +37,9 @@ const getNotesController = async (req, res, next) => {
 };
 
 
-// image2 lo dejar pasar JOI. Necesito que la imagen sea opcional, pero que si pasa, se llame image.
+// Controlador para la creación de una nueva nota.
+// Título, texto, categoría y privacidad son parámetros obligatorios. Privacidad solo admite 'yes' o 'no'.
+// Opcionalmente, el usuario puede asociar una única imagen a su nota, en formato jpg.
 const newNoteController = async (req, res, next) => {
 
     try {
@@ -91,7 +94,9 @@ const newNoteController = async (req, res, next) => {
 };
 
 
-
+// Controlador para recibir una nota en concreto. 
+// Si la nota es pública, cualquier usuario podrá verla, esté registrado o no.
+// Si es privada, el usuario tendrá que identificarse como el creador para tener acceso a ella.
 const getSingleNoteController = async (req, res, next) => {
     try {
 
@@ -140,7 +145,8 @@ const getSingleNoteController = async (req, res, next) => {
 
 
 
-
+// Controlador para borrar una nota.
+// EL usuario tiene que identificarse como el creador si desea borrarla.
 const deleteNoteController = async (req, res, next) => {
 
     try {
@@ -167,6 +173,8 @@ const deleteNoteController = async (req, res, next) => {
 };
 
 
+// Devuelve los títulos de las notas creada por un usuario en concreto.
+// De nuevo, es necesario que el usuario se identifique como su creador, a través del Token.
 const getNotesListController = async (req, res, next) => {
     try {
         const { id } = req.params;  
@@ -195,7 +203,8 @@ const getNotesListController = async (req, res, next) => {
 
 
 
-
+// Controlador para editar notas. Aquí se puede editar texto, título e incluso imagen, si el usuario quiere asociar una o cambiar la existente.
+// Identificación necesaria.
 const editNoteController = async (req, res, next) => {
 
     try {
@@ -272,7 +281,9 @@ const editNoteController = async (req, res, next) => {
 
 
 
-
+// Controlador de la privacidad de la nota.
+// El usuario, trás identificarse como el creador, accede a la privacidad de la nota. 
+// En el caso de que decida hacerla pública (public = yes), esta nota podrá ser vista por todo el mundo.
  const notePrivacyController = async (req, res, next) => {
     try {
 
@@ -312,7 +323,7 @@ const editNoteController = async (req, res, next) => {
 };
         
 
-
+// Controlador para la edición de categorías, identificación de usuario necesaria.
 const categoryController = async (req, res, next) => {
     try {
 

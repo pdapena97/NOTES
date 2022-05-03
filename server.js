@@ -40,7 +40,7 @@ app.post('/login', loginController);
 // Rutas de notes
 app.get('/notes/:id',authUser, getNotesController);      
 app.post('/',authUser, newNoteController);  
-app.get('/note/:id', getSingleNoteController);   // cuidao con el authUser. Caso no registrado pero nota publica. Quité el authUser de aquí.
+app.get('/note/:id', getSingleNoteController);   
 app.delete('/note/:id',authUser, deleteNoteController); 
 app.get('/list/:id',authUser, getNotesListController) 
 app.put('/note/:id',authUser, editNoteController);   

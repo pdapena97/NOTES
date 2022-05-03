@@ -18,11 +18,7 @@ const newUserController = async (req, res, next) => {
         const validation = schema.validate(req.body);
 
         if (validation.error) {
-            res.send({
-                status: 'error',
-                usuario: 'Introduce un email válido y una contraseña, por favor',
-                error_message: validation.error.message
-            })
+            throw generateError(`Introduce un email válido y contraseña, por favor. Error al enviar los datos: ${validation.error.message}`, 401);
         }
 
         else { const id = await createUser(email,password);
@@ -39,7 +35,7 @@ const newUserController = async (req, res, next) => {
 };
 
 
-// De todos modos, esto debería sobrar, no me lo piden ni tiene sentido creo. Eso o añadir privacidad.
+
 
 const getUserController = async (req, res, next) => {
     try {
@@ -71,11 +67,7 @@ const loginController = async (req, res, next) => {
         const validation = schema.validate(req.body);
 
         if (validation.error) {
-            res.send({
-                status: 'error',
-                user: 'Introduce tu email y contraseña',
-                error_message: validation.error.message
-            })
+            throw generateError(`Introduce tu email y contraseña. Error al enviar los datos: ${validation.error.message}`, 401);
         }
         
         const user = await getUserByEmail(email);
@@ -83,7 +75,7 @@ const loginController = async (req, res, next) => {
         const validPassword = await bcrypt.compare(password, user.password);
 
         if (!validPassword) {
-            throw generateError('La contraseña no coincide', 401);
+            throw generateError('Contraseña incorrecta', 401);
         }
 
         const payload = {id: user.id};
@@ -94,8 +86,9 @@ const loginController = async (req, res, next) => {
 
         res.send({
             status: 'ok',
-            message: 'Esta es tu clave de acceso:',
+            message: 'Esta es tu clave de acceso y tu ID de usuario',
             token: token,
+            user_id: user.id
         });
 
     } catch(error) {

@@ -149,7 +149,7 @@ const editCategory = async (id, category ) => {
 };
 
 
-// PRIVACIDAD
+
 
 const editNotePrivacy = async (id, public) => {
     let connection;
