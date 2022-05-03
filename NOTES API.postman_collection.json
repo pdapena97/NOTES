@@ -1,0 +1,367 @@
+{
+	"info": {
+		"_postman_id": "fb4dd313-e397-4044-a0f7-0019aeb608b5",
+		"name": "NOTES API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"ejemplo@email.com\",\n    \"password\": \"ejemplo\"\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"pablo@email.com\",\n    \"password\": \"pablo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Notes",
+			"item": [
+				{
+					"name": "New Note",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjUxNTgyNzEwLCJleHAiOjE2NTQxNzQ3MTB9.zHXncr_LNVsaubBt_h3762lcjnkalJNLu0lccIjEyk4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "text",
+									"value": "texto de ejemplo",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Titulo",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/home/usuario/Descargas/arrow.jpg",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "categoria de ejemplo",
+									"type": "text"
+								},
+								{
+									"key": "public",
+									"value": "no",
+									"type": "text"
+								},
+								{
+									"key": "image2",
+									"type": "file",
+									"src": "/home/usuario/Descargas/arrow.jpg",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000"
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Notes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjUxNTg0NDUzLCJleHAiOjE2NTQxNzY0NTN9.dFX17tuOovfuG2OxC0CtA5jaa6xKuIQa6EiENP-MhQg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/notes/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"notes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Note",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjUxNTgzNTE2LCJleHAiOjE2NTQxNzU1MTZ9.N7al_JgJfKBYNvxlLKDcGiKfyujx4Hmqw7JG9nOiJZQ",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/note/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"note",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Note",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjUxNTgzNTE2LCJleHAiOjE2NTQxNzU1MTZ9.N7al_JgJfKBYNvxlLKDcGiKfyujx4Hmqw7JG9nOiJZQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/note/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"note",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Notes Title List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjUxNTgzNTE2LCJleHAiOjE2NTQxNzU1MTZ9.N7al_JgJfKBYNvxlLKDcGiKfyujx4Hmqw7JG9nOiJZQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/list/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"list",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Note",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjUxNTgzNTE2LCJleHAiOjE2NTQxNzU1MTZ9.N7al_JgJfKBYNvxlLKDcGiKfyujx4Hmqw7JG9nOiJZQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "text",
+									"value": "Nuevo texto",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "category",
+									"value": "Categoria",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "Nuevo titulo",
+									"type": "text"
+								},
+								{
+									"key": "public",
+									"value": "no",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/note/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"note",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Note Categories",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjUxNTgzNTE2LCJleHAiOjE2NTQxNzU1MTZ9.N7al_JgJfKBYNvxlLKDcGiKfyujx4Hmqw7JG9nOiJZQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"category\": \"categoria1, categoria2, ...\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/category/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Note Privacy Control",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjUxNTgzNTE2LCJleHAiOjE2NTQxNzU1MTZ9.N7al_JgJfKBYNvxlLKDcGiKfyujx4Hmqw7JG9nOiJZQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"public\": \"no\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/privacy/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"privacy",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
