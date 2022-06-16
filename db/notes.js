@@ -87,6 +87,47 @@ const getNotesList = async (id) => {
 
 
 
+const getUserPublicNotes = async (id) => {
+    let connection;
+
+    try {
+        connection = await getConnection();
+
+        const [result] = await connection.query(`
+        SELECT * FROM notes WHERE public="yes" AND user_id=?
+        `,[id]);
+      
+        return result;
+
+    } finally {
+        if (connection) connection.release();
+    }
+};
+
+
+
+const getPublicNotes = async () => {
+    let connection;
+
+    try {
+        connection = await getConnection();
+
+        const [result] = await connection.query(`
+        SELECT * FROM notes WHERE public="yes"
+        `);
+      
+        return result;
+
+    } finally {
+        if (connection) connection.release();
+    }
+};
+
+
+
+
+
+
 const getUserNotes = async (id) => {
     let connection;
 
@@ -94,7 +135,7 @@ const getUserNotes = async (id) => {
         connection = await getConnection();
 
         const [result] = await connection.query(`
-        SELECT * FROM notes WHERE user_id=? ORDER BY created_at DESC
+        SELECT * FROM notes WHERE user_id=? ORDER BY created_at ASC
         `, [id]);
 
         return result;
@@ -179,5 +220,7 @@ module.exports = {
     getNotesList,
     editNoteById,
     editCategory,
-    editNotePrivacy
+    editNotePrivacy,
+    getPublicNotes,
+    getUserPublicNotes
 };

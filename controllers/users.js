@@ -36,7 +36,7 @@ const newUserController = async (req, res, next) => {
 
 
 
-
+// PROBLEMA AQUI
 const getUserController = async (req, res, next) => {
     try {
         const {id} = req.params;
@@ -54,6 +54,21 @@ const getUserController = async (req, res, next) => {
 };
 
 
+const getMeController = async (req, res, next) => {
+    try {
+      const user = await getUserById(req.userId, false);
+  
+      res.send({
+        status: 'ok',
+        data: user,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+
+
 
 const loginController = async (req, res, next) => {
     try {
@@ -67,7 +82,7 @@ const loginController = async (req, res, next) => {
         const validation = schema.validate(req.body);
 
         if (validation.error) {
-            throw generateError(`Introduce tu email y contraseña. Error al enviar los datos: ${validation.error.message}`, 401);
+            throw generateError(`Introduce your email and password: ${validation.error.message}`, 401);
         }
         
         const user = await getUserByEmail(email);
@@ -75,7 +90,7 @@ const loginController = async (req, res, next) => {
         const validPassword = await bcrypt.compare(password, user.password);
 
         if (!validPassword) {
-            throw generateError('Contraseña incorrecta', 401);
+            throw generateError('Wrong Password', 401);
         }
 
         const payload = {id: user.id};
@@ -102,4 +117,5 @@ module.exports = {
     newUserController,
     getUserController,
     loginController,
+    getMeController,
 };

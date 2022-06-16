@@ -1,5 +1,5 @@
 const { generateError, createPathIfNotExists } = require("../helpers");
-const { createNote, getUserNotes, getNoteById, deleteNoteById, getNotesList, editNoteById, editCategory, editNotePrivacy } = require("../db/notes");
+const { createNote, getUserNotes, getNoteById, deleteNoteById, getNotesList, editNoteById, editCategory, editNotePrivacy, getPublicNotes, getUserPublicNotes } = require("../db/notes");
 const path = require('path');
 const sharp = require('sharp');
 const {nanoid} = require('nanoid');
@@ -35,6 +35,38 @@ const getNotesController = async (req, res, next) => {
         next(error);
     }
 };
+
+
+
+// notas publicas
+const getPublicNotesController = async (req, res, next) => {
+    try {
+        //const { id } = req.params;
+        const notes = await getPublicNotes();
+        
+        
+        //if (req.userId !== Number(req.params.id)) {
+            
+            //throw generateError ('Estás intentando ver notas que no son tuyas', 401);
+        //}
+
+        //if (notes.length === 0) {
+            //throw generateError ('Aún no has creado ninguna nota', 404);
+            //}
+        res.send({
+            status: 'ok',
+            message: `Has creado ${notes.length} notas:`,
+            data: notes,
+        })
+
+    } catch(error) {
+        next(error);
+    }
+};
+
+
+
+
 
 
 // Controlador para la creación de una nueva nota.
@@ -82,10 +114,12 @@ const newNoteController = async (req, res, next) => {
 
 
         const id = await createNote(req.userId, text, imageFileName, title, category, public);
+        const note = await getNoteById(id);
     
         res.send({
             status: 'ok',
             message: `Nota con id: ${id}' creada correctamente`,
+            data: note,
         });
 
     } catch(error) {
@@ -173,6 +207,29 @@ const deleteNoteController = async (req, res, next) => {
 };
 
 
+const getUserPublicNotesController = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+
+        const list = await getUserPublicNotes(id); 
+        
+        if (list.length === 0) {
+         throw generateError ('No podemos enviar los títulos, aún no has creado ninguna nota', 404);
+        }
+
+        res.send ({
+            status: 'ok',
+            data: list,
+        })
+
+    } catch(error) {
+        next(error);
+    }
+};
+
+
+
+
 // Devuelve los títulos de las notas creada por un usuario en concreto.
 // De nuevo, es necesario que el usuario se identifique como su creador, a través del Token.
 const getNotesListController = async (req, res, next) => {
@@ -200,6 +257,7 @@ const getNotesListController = async (req, res, next) => {
         next(error);
     }
 };    
+
 
 
 
@@ -372,5 +430,7 @@ module.exports = {
     getNotesListController,
     editNoteController,
     categoryController,
-    notePrivacyController
+    notePrivacyController,
+    getPublicNotesController,
+    getUserPublicNotesController
 };
